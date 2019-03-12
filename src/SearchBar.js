@@ -1,6 +1,10 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
+
+// Action Creators
+import * as actionCreators from "./store/actions";
 
 class SearchBar extends Component {
   state = { query: "" };
@@ -31,4 +35,13 @@ class SearchBar extends Component {
   }
 }
 
-export default SearchBar;
+const mapDispatchToProps = dispatch => {
+  return {
+    changeHandler: query => dispatch(actionCreators.filterAuthors(query))
+  };
+};
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(SearchBar);
